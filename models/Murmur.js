@@ -10,7 +10,8 @@ const murmurSchema = new Schema({
     date: {type: Date, default: Date.now},
     tags: [{type:String, required: true}],
     comments: [{username: String, body: String, date: Date}],
-    likes: {upvotes: [{username: String}], downvotes:[{username: String}]},
+    upvotes: [{username: String}], 
+    downvotes:[{username: String}],
     });
 
 export default model("Murmur", murmurSchema);
