@@ -35,10 +35,52 @@ export const getMurmurById = async (req, res) => {
 
 export const upvoteMurMur = async (req, res) => {
   try {
-    const murMur = await Murmur.findOneAndUpdate({"_id": req.body.id}, { $push: {likes: req.body.username}});
-    res.status(200).json(murMur);
+    const upvotes = await Murmur.find({ "upvotes.username" : req.body.username}).exec();
+    const downvotes = await Murmur.find({ "downvotes.username" : req.body.username}).exec();
+
+    console.log(upvotes.length);
+    if(upvotes.length <= 0)
+    {
+      if (downvotes.length >= 0)
+      {
+        const deleteDownvote = await Murmur.findOneAndUpdate({"_id": req.body.id}, { $pull: {"downvotes" : {"username": req.body.username}}},
+        {new : true}).exec();
+      }
+      const murMur = await Murmur.findOneAndUpdate({"_id": req.body.id}, { $push: {"upvotes": {"username": req.body.username}}});
+      res.status(200).json(murMur);
+    }
+    else {
+      const murMur = await Murmur.findOneAndUpdate({"_id": req.body.id}, { $pull: {"upvotes" : {"username": req.body.username}}},
+      {new : true})
+      res.status(200).json(murMur);
+    }
   } catch (error) {
     res.status(404).json(error);
   }
+};
 
+export const downvoteMurMur = async (req, res) => {
+  try {
+    const downvotes = await Murmur.find({ "downvotes.username" : req.body.username}).exec();
+    const upvotes = await Murmur.find({ "upvotes.username" : req.body.username}).exec();
+
+    if(downvotes.length <= 0)
+    {
+      if (upvotes.length >= 0)
+      {
+        const deleteUpvote = await Murmur.findOneAndUpdate({"_id": req.body.id}, { $pull: {"upvotes" : {"username": req.body.username}}},
+        {new : true}).exec();
+      }
+
+      const murMur = await Murmur.findOneAndUpdate({"_id": req.body.id}, { $push: {"downvotes": {"username": req.body.username}}});
+      res.status(200).json(murMur);
+    }
+    else {
+      const murMur = await Murmur.findOneAndUpdate({"_id": req.body.id}, { $pull: {"downvotes" : {"username": req.body.username}}},
+      {new : true})
+      res.status(200).json(murMur);
+    }
+  } catch (error) {
+    res.status(404).json(error);
+  }
 };
