@@ -32,3 +32,13 @@ export const getMurmurById = async (req, res) => {
   }
   
 };
+
+export const upvoteMurMur = async (req, res) => {
+  try {
+    const murMur = await Murmur.findOneAndUpdate({"_id": req.body.id}, { $push: {likes: req.body.username}});
+    res.status(200).json(murMur);
+  } catch (error) {
+    res.status(404).json(error);
+  }
+
+};
