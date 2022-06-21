@@ -22,3 +22,13 @@ export const getMurmurByCity = async (req, res) => {
   
 };
 
+export const getMurmurById = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const murMur = await Murmur.findById(id).exec();
+    res.status(200).json(murMur);
+  } catch (error) {
+    res.status(404).json(error);
+  }
+  
+};
