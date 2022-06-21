@@ -9,3 +9,13 @@ export const createNewUser = async (req, res) => {
       res.status(500).json(error);
     }
   };
+
+export const getUser = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await User.findOne({ username: username}).exec();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json(error);
+  }
+};
