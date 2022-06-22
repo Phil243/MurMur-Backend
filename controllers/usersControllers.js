@@ -33,6 +33,35 @@ export const createNewUser = async (req, res) => {
   }
 };
 
+export const logIn = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    const findUser = await User.findOne({ email }).select('+password');
+    
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      findUser.password
+    );
+    
+    if (isPasswordCorrect) {
+      const token = jwt.sign(
+        { email: findUser.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+      res
+        .status(200)
+        .set("Authorization", token)
+        .send("Login successful");
+    } else {
+      res.status(401).send("Unauthorized");
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export const getUser = async (req, res) => {
   try {
     const { username } = req.params;
@@ -41,4 +70,8 @@ export const getUser = async (req, res) => {
   } catch (error) {
     res.status(404).json(error);
   }
+};
+
+export const verifySession = (req, res) => {
+  res.status(200).send("Token successfully verified");
 };
