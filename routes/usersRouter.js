@@ -8,7 +8,6 @@ const usersRouter = Router();
 
 usersRouter.route("/register").post(createNewUser);
 usersRouter.route("/login").post(logIn);
-usersRouter.route("/:username").get(getUser);
 usersRouter.route("/verify").get(verifyToken, verifySession);
 
 export default usersRouter;
