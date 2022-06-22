@@ -4,6 +4,6 @@ import { verifyToken } from "../middleware/verifyToken.js";
 
 const protectedRoute = Router();
 
-protectedRoute("/me").get(verifyToken, getUser)
+protectedRoute.route("/me").get(verifyToken, getUser)
 
 export default protectedRoute;
