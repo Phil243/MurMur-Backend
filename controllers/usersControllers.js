@@ -64,9 +64,9 @@ export const logIn = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    const { username } = req.params;
-    const user = await User.findOne({ username: username }).exec();
-    res.status(200).json(user);
+    const { email } = req.user;
+    const findUser = await User.findOne({ email }).exec();
+    res.status(200).json(findUser);
   } catch (error) {
     res.status(404).json(error);
   }
