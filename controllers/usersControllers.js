@@ -72,16 +72,17 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const getUserInfo = async (req, res) => {
+export const getUserInfoById = async (req, res) => {
   try {
-    const {username} = req.params;
-    const user = await User.findOne({ username: username }).exec();
+    console.log("jo");
+    const {id} = req.params;
+    const user = await User.findOne({ _id: id });
     const userInfo = {
-      username: username,
+      username: user.username,
       picture: user.picture,
-      accountLikes: user.accountlikes
-    }
-    res.status(200).json(user);
+      accountlikes: user.accountlikes
+    };
+    res.status(200).json(userInfo);
 
   } catch (error) {
     res.status(404).json(error);
