@@ -72,6 +72,24 @@ export const getUser = async (req, res) => {
   }
 };
 
+export const getUserInfoById = async (req, res) => {
+  try {
+    console.log("jo");
+    const {id} = req.params;
+    const user = await User.findOne({ _id: id });
+    const userInfo = {
+      username: user.username,
+      picture: user.picture,
+      accountlikes: user.accountlikes
+    };
+    res.status(200).json(userInfo);
+
+  } catch (error) {
+    res.status(404).json(error);
+  }
+  
+}
+
 export const verifySession = (req, res) => {
   res.status(200).send("Token successfully verified");
 };
