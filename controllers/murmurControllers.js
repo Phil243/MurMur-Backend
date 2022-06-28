@@ -35,8 +35,8 @@ export const getMurmurById = async (req, res) => {
 
 export const upvoteMurMur = async (req, res) => {
   try {
-    const upvotes = await Murmur.find({ "upvotes.username" : req.body.username}).exec();
-    const downvotes = await Murmur.find({ "downvotes.username" : req.body.username}).exec();
+    const upvotes = await Murmur.find({ "_id": req.body.id, "upvotes.username" : req.body.username}).exec();
+    const downvotes = await Murmur.find({ "_id": req.body.id, "downvotes.username" : req.body.username}).exec();
 
     console.log(upvotes.length);
     if(upvotes.length <= 0)
@@ -61,8 +61,8 @@ export const upvoteMurMur = async (req, res) => {
 
 export const downvoteMurMur = async (req, res) => {
   try {
-    const downvotes = await Murmur.find({ "downvotes.username" : req.body.username}).exec();
-    const upvotes = await Murmur.find({ "upvotes.username" : req.body.username}).exec();
+    const downvotes = await Murmur.find({ "_id": req.body.id, "downvotes.username" : req.body.username}).exec();
+    const upvotes = await Murmur.find({ "_id": req.body.id, "upvotes.username" : req.body.username}).exec();
 
     if(downvotes.length <= 0)
     {
