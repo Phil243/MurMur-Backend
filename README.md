@@ -109,6 +109,6 @@ Mehtap, Paul, Philipp
 
 ## Special Thanks
 
-Julia
+Julia,
 WBS-Coding-School-Staff
 
