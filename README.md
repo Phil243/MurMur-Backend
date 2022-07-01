@@ -2,7 +2,7 @@
 
 Welcome to MurMur - API, our request-handler connecting the MurMur-Travel Guide to our database.
 
-Find our API @ https://murmur-backend.herokuapp.com/
+Find our github @ https://github.com/Phil243/MurMur-Backend
 
 ## MurMur - API & MongoDB
 
@@ -110,4 +110,5 @@ Mehtap, Paul, Philipp
 ## Special Thanks
 
 Julia
+WBS-Coding-School-Staff
 

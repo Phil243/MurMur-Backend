@@ -20,8 +20,11 @@ app.use("/api/users", usersRouter);
 app.use("/api/protected", protectedRoute);
 app.use("/api/murmur", murmurRouter);
 
-app.get("/", (req, res) =>
-  res.send("<h1>This is our MurMur Api!</h1>")
-);
+app.get("/", (req, res) =>{
+  res.write("<h1># MurMur - API</p>")
+  res.write("<h3>Welcome to MurMur - API, our request-handler connecting the MurMur-Travel Guide to our database.</h3>")
+  res.write("<p>Find a proper documentation at our github @ https://github.com/Phil243/MurMur-Backend</p>")
+  res.send()
+});
 
 app.listen(port, () => console.log(`Server running in port ${port}`));
