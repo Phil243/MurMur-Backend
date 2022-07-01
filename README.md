@@ -9,22 +9,6 @@ Find our API @ https://murmur-backend.herokuapp.com/
 Our API handles request and connects to a Database on MongoDB.
 We are currently using two collections.
 
-## Collection: murmurs
-
-This collection is using the following schema:
-
-    {   
-        user_id: String,
-        city: {type:String, required: true},
-        tip: {type:String, required: true},
-        picture: String,
-        address: String,
-        date: {type: Date, default: Date.now},
-        tags: [{type:String, required: true}],
-        comments: [{username: String, body: String, date: Date}],
-        upvotes: [{username: String}], 
-        downvotes:[{username: String}],
-    }
 
 ## Collection: users
 
@@ -64,6 +48,23 @@ Requires successful Authentification
 
 accepts GET requests, delivers user e-mail
 
+## Collection: murmurs
+
+This collection is using the following schema:
+
+    {   
+        user_id: String,
+        city: {type:String, required: true},
+        tip: {type:String, required: true},
+        picture: String,
+        address: String,
+        date: {type: Date, default: Date.now},
+        tags: [{type:String, required: true}],
+        comments: [{username: String, body: String, date: Date}],
+        upvotes: [{username: String}], 
+        downvotes:[{username: String}],
+    }
+
 ### murmur Endpoints
 
 --https://murmur-backend.herokuapp.com/api/murmur
@@ -96,7 +97,7 @@ accepts PUT requests and updates the murmurs downvote counter
 "jsonwebtoken": "^8.5.1",
 "mongoose": "^6.4.0"
 
-### MurMur Frontend-App
+## MurMur Frontend-App
 
 github @ https://github.com/paul-ludwigs/MurMur-Frontend
 
