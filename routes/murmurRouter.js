@@ -13,7 +13,7 @@ const murmurRouter = Router();
 
 murmurRouter.route("/").post(createNewMurmur);
 
-murmurRouter.route("/upload").post( upload.single('uploadedPicture'), uploadPicture)
+
 
 murmurRouter.route("/:cityname").get(getMurmurByCity);
 
