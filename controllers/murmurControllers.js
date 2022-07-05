@@ -137,3 +137,15 @@ export const downvoteMurMur = async (req, res) => {
     res.status(404).json(error);
   }
 };
+
+
+export const createComment = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const murMur = await Murmur.findOneAndUpdate({"_id": id}, {$push: {"comments": {"username": req.body.username, "body": req.body.comment, "date": req.body.date}}})
+    res.status(200).json(murMur);
+  } catch (error) {
+    res.status(404).json(error);
+  }
+}
+
