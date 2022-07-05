@@ -5,6 +5,7 @@ import usersRouter from "./routes/usersRouter.js";
 import murmurRouter from "./routes/murmurRouter.js";
 import protectedRoute from "./routes/protectedRoutes.js";
 import cors from "cors";
+import path from "path";
 
 
 const app = express();
@@ -14,8 +15,9 @@ const corsOptions = {
   exposedHeaders: 'Authorization',
 };
 
-app.use(express.json());
 app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.static(path.resolve("./public")));
 app.use("/api/users", usersRouter);
 app.use("/api/protected", protectedRoute);
 app.use("/api/murmur", murmurRouter);

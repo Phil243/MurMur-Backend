@@ -1,12 +1,20 @@
 import { Router } from "express";
 import {
+
+  
+
     createComment,
     createNewMurmur, downvoteMurMur, getMurmurByCity, getMurmurById, upvoteMurMur,
+
 } from "../controllers/murmurControllers.js";
+import {upload} from "../middleware/multer.js"
+
 
 const murmurRouter = Router();
 
 murmurRouter.route("/").post(createNewMurmur);
+
+murmurRouter.route("/upload").post( upload.single('uploadedPicture'), uploadPicture)
 
 murmurRouter.route("/:cityname").get(getMurmurByCity);
 
