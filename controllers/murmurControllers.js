@@ -3,15 +3,11 @@ import murmurRouter from "../routes/murmurRouter.js";
 
 
 
-export const uploadPicture = async (req, res) => {
-  // Soll Pfad zum Bild zurück schicken
-  console.log(req.file);
-  res.status(200).send(req.file.filename);
-};
+
 
 export const createNewMurmur = async (req, res) => {
  
-  const url = req.protocol + '://' + req.get('host')
+
 
   try {
     const {
@@ -24,7 +20,7 @@ export const createNewMurmur = async (req, res) => {
       tags,
     } = req.body;
     
-    let uploadedPicture = url + '/public/' + req.file.filename
+    
 
     const newMurmur = await Murmur.create({
       user_id,
@@ -34,7 +30,7 @@ export const createNewMurmur = async (req, res) => {
       address,
       date,
       tags,
-      uploadedPicture,
+      
     });
     res.status(201).json(newMurmur);
   } catch (error) {

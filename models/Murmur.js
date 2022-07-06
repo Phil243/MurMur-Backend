@@ -12,7 +12,6 @@ const murmurSchema = new Schema({
     comments: [{username: String, body: String, date: Date}],
     upvotes: [{username: String}], 
     downvotes:[{username: String}],
-    uploadedPicture: {type:String}
     });
 
 export default model("Murmur", murmurSchema);
